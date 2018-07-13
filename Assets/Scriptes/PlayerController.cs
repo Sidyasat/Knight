@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
     float speed = 2f;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
+        return;
     }
 
     public void MoveAnimation()
@@ -58,20 +60,24 @@ public class PlayerController : MonoBehaviour {
         if (vertical <= -0.1f)
         {
             animator.SetBool("RunBack", true);
+            return;
         }
 
         if (horizontal == 0)
         {
             animator.SetBool("RunRight", false);
             animator.SetBool("RunLeft", false);
+            return;
         }
         if (horizontal >= 0.1f)
         {
             animator.SetBool("RunRight", true);
+            return;
         }
         if (horizontal <= -0.1f)
         {
             animator.SetBool("RunLeft", true);
+            return;
         }
     }
 
@@ -80,6 +86,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("Attack");
+            return;
         }
     }
 
@@ -96,12 +103,14 @@ public class PlayerController : MonoBehaviour {
         {
             HP = 1f;
         }
+        return;
     }
 
     public void AddElixir()
     {
         UIHP.fillAmount = HP;
         HPBottleText.text = "" + HPBottle;
+        return;
     }
 
     void Update()
@@ -109,6 +118,7 @@ public class PlayerController : MonoBehaviour {
         if (HP <= 0)
         {
             AnimationTriggerDeath("Dead");
+            return;
         }
         else
         {
